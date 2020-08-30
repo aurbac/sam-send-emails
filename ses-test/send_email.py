@@ -20,7 +20,7 @@ object_name = 'files/tokyo-skytree.pdf'
 expiration = 86400
 values = { 'NAME' : name, 'URL_FILE': '', 'TITLE_FILE': 'Tokyo SkyTree' }
 
-subject = 'Download file: '+values['TITLE_FILE']
+subject = 'Download file from URL: '+values['TITLE_FILE']
 
 try:
     response_url = s3.generate_presigned_url('get_object',

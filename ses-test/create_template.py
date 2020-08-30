@@ -15,7 +15,7 @@ except ClientError as e:
 response = ses.create_template(
     Template={
         'TemplateName': template_name,
-        'SubjectPart': 'Base template',
+        'SubjectPart': 'Base template: Download file from URL',
         'TextPart': 'Example of message',
         'HtmlPart': s
     }

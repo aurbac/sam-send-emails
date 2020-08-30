@@ -23,7 +23,7 @@ object_name = 'files/tokyo-skytree.pdf'
 expiration = 86400
 values = { 'NAME' : name, 'URL_FILE': '', 'TITLE_FILE': 'Tokyo SkyTree' }
 
-subject = 'Download file: '+values['TITLE_FILE']
+subject = 'Download file from URL and attachment: '+values['TITLE_FILE']
 
 try:
     response_url = s3.generate_presigned_url('get_object',
@@ -37,9 +37,6 @@ except ClientError as e:
 s = s.replace('{{NAME}}', values['NAME'])
 s = s.replace('{{URL_FILE}}', values['URL_FILE'])
 s = s.replace('{{TITLE_FILE}}', values['TITLE_FILE'])
-
-
-
 
 
 # The full path to the file that will be attached to the email.

@@ -43,9 +43,9 @@ def send_email(sender_email, email_destination, name_destination, html, bucket_n
     
     object_name = s3_key
     expiration = 86400
-    values = { 'NAME': name_destination, 'URL_FILE': '', 'TITLE_FILE': 'Tokyo' }
+    values = { 'NAME': name_destination, 'URL_FILE': '', 'TITLE_FILE': 'Tokyo SkyTree' }
     
-    subject = 'Example download file - Attachment & URL'
+    subject = 'SQS -> Lambda - Download file from URL and attachment: '+values['TITLE_FILE']
     
     try:
         response_url = s3.generate_presigned_url('get_object',
