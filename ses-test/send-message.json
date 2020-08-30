@@ -1,0 +1,14 @@
+{
+  "EmailDestination": {
+    "DataType": "String",
+    "StringValue": "email@domain.com"
+  },
+  "NameDestination": {
+    "DataType": "String",
+    "StringValue": "Name"
+  },
+  "S3Key": {
+    "DataType": "String",
+    "StringValue": "files/tokyo-skytree.pdf"
+  }
+}

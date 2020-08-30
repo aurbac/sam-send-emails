@@ -1,0 +1,297 @@
+<!doctype html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Simple Transactional Email</title>
+    <style>
+    /* -------------------------------------
+        INLINED WITH htmlemail.io/inline
+    ------------------------------------- */
+    /* -------------------------------------
+        RESPONSIVE AND MOBILE FRIENDLY STYLES
+    ------------------------------------- */
+    @media only screen and (max-width: 620px) {
+      table[class=body] h1 {
+        font-size: 28px !important;
+        margin-bottom: 10px !important;
+      }
+      table[class=body] p,
+            table[class=body] ul,
+            table[class=body] ol,
+            table[class=body] td,
+            table[class=body] span,
+            table[class=body] a {
+        font-size: 16px !important;
+      }
+      table[class=body] .wrapper,
+            table[class=body] .article {
+        padding: 10px !important;
+      }
+      table[class=body] .content {
+        padding: 0 !important;
+      }
+      table[class=body] .container {
+        padding: 0 !important;
+        width: 100% !important;
+      }
+      table[class=body] .main {
+        border-left-width: 0 !important;
+        border-radius: 0 !important;
+        border-right-width: 0 !important;
+      }
+      table[class=body] .btn table {
+        width: 100% !important;
+      }
+      table[class=body] .btn a {
+        width: 100% !important;
+      }
+      table[class=body] .img-responsive {
+        height: auto !important;
+        max-width: 100% !important;
+        width: auto !important;
+      }
+    }
+
+    /* -------------------------------------
+        PRESERVE THESE STYLES IN THE HEAD
+    ------------------------------------- */
+    @media all {
+      .ExternalClass {
+        width: 100%;
+      }
+      .ExternalClass,
+            .ExternalClass p,
+            .ExternalClass span,
+            .ExternalClass font,
+            .ExternalClass td,
+            .ExternalClass div {
+        line-height: 100%;
+      }
+      .apple-link a {
+        color: inherit !important;
+        font-family: inherit !important;
+        font-size: inherit !important;
+        font-weight: inherit !important;
+        line-height: inherit !important;
+        text-decoration: none !important;
+      }
+      #MessageViewBody a {
+        color: inherit;
+        text-decoration: none;
+        font-size: inherit;
+        font-family: inherit;
+        font-weight: inherit;
+        line-height: inherit;
+      }
+      .btn-primary table td:hover {
+        background-color: #bf2d06 !important;
+      }
+      .btn-primary a:hover {
+        background-color: #bf2d06 !important;
+        border-color: #bf2d06 !important;
+      }
+    }
+    </style>
+  </head>
+  <body class="" style="background-color: #f6f6f6; font-family: sans-serif; -webkit-font-smoothing: antialiased; font-size: 14px; line-height: 1.4; margin: 0; padding: 0; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;">
+    <table border="0" cellpadding="0" cellspacing="0" class="body" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background-color: #f6f6f6;">
+      <tr>
+        <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">&nbsp;</td>
+        <td class="container" style="font-family: sans-serif; font-size: 14px; vertical-align: top; display: block; Margin: 0 auto; max-width: 580px; padding: 10px; width: 580px;">
+          <div class="content" style="box-sizing: border-box; display: block; Margin: 0 auto; max-width: 580px; padding: 10px;">
+
+            <!-- START CENTERED WHITE CONTAINER -->
+            <span class="preheader" style="color: transparent; display: none; height: 0; max-height: 0; max-width: 0; opacity: 0; overflow: hidden; mso-hide: all; visibility: hidden; width: 0;">This is preheader text. Some clients will show this text as a preview.</span>
+            <table class="main" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background: #ffffff; border-radius: 3px;">
+
+              <!-- START MAIN CONTENT AREA -->
+              <tr>
+                <td class="wrapper" style="font-family: sans-serif; font-size: 14px; vertical-align: top; box-sizing: border-box; padding: 20px;">
+                  <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;">
+                    <tr>
+                      <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">
+                        <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Hi there, {{NAME}}</p>
+                        <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Sometimes you just want to send a simple HTML email with a simple design and clear call to action. This is it.</p>
+                        <table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; box-sizing: border-box;">
+                          <tbody>
+                            <tr>
+                              <td align="left" style="font-family: sans-serif; font-size: 14px; vertical-align: top; padding-bottom: 15px;">
+                                <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: auto;">
+                                  <tbody>
+                                    <tr>
+                                      <td style="font-family: sans-serif; font-size: 14px; vertical-align: top; background-color: #3498db; border-radius: 5px; text-align: center;"> <a href="{{URL_FILE}}" target="_blank" style="display: inline-block; color: #ffffff; background-color: #d45b07; border: solid 1px #d45b07; border-radius: 5px; box-sizing: border-box; cursor: pointer; text-decoration: none; font-size: 14px; font-weight: bold; margin: 0; padding: 12px 25px; text-transform: capitalize; border-color: #d45b07;">{{TITLE_FILE}}</a> </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">This is a really simple email template. Its sole purpose is to get the recipient to click the button with no distractions.</p>
+                        
+
+                        
+                      </td>
+                    </tr>
+                  </table>
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                        <table cellpadding="0" cellspacing="0" class="es-content" align="center">
+                            <tbody>
+                                <tr>
+                                    <td class="esd-stripe" align="center" bgcolor="#ffffff" style="background-color: #ffffff;">
+                                        <table bgcolor="transparent" class="es-content-body" align="center" cellpadding="0" cellspacing="0" width="600" style="background-color: transparent;">
+                                            <tbody>
+                                                <tr>
+                                                    <td class="esd-structure es-p40t es-p20b es-p30r es-p30l" align="left">
+                                                        <table cellpadding="0" cellspacing="0" width="100%">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td width="540" class="esd-container-frame" align="center" valign="top">
+                                                                        <table cellpadding="0" cellspacing="0" width="100%">
+                                                                            <tbody>
+                                                                                <tr>
+                                                                                    <td align="left" class="esd-block-text">
+                                                                                        <h2 style="text-align: center;">Customer Engagement Services</h2>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="esd-structure es-p20t es-p20b es-p20r es-p20l" align="left">
+                                                        <!--[if mso]><table width="560" cellpadding="0" cellspacing="0"><tr><td width="270" valign="top"><![endif]-->
+                                                        <table cellpadding="0" cellspacing="0" class="es-left" align="left">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td width="270" align="left" class="esd-container-frame">
+                                                                        <table cellpadding="0" cellspacing="0" width="100%" bgcolor="#ffffff" style="background-color: #ffffff; border-radius: 3px; border-collapse: separate;">
+                                                                            <tbody>
+                                                                                <tr>
+                                                                                    <td align="center" class="esd-block-image" style="font-size: 0px;"><a target="_blank" class="rollover"><img class="adapt-img rollover-first" src="https://s3.amazonaws.com/aurbac.com/images/pinpoint.jpg" alt style="display: block;" width="270">
+                                                                                            <div style="mso-hide:all;"><img width="270" class="adapt-img rollover-second" style="max-height: 0px; display: none;" src="https://s3.amazonaws.com/aurbac.com/images/pinpoint.jpg" alt></div>
+                                                                                        </a></td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td align="left" class="esd-block-text es-m-txt-c es-p10t es-p15r es-p15l">
+                                                                                        <h3 style="color: #071f4f; font-size: 22px;">Multichannel marketing communication service</h3>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td align="left" class="esd-block-text es-m-txt-c es-p5t es-p15r es-p15l">
+                                                                                        <p style="color: #999999;">Amazon Pinpoint is a flexible and scalable outbound and inbound marketing communications service. You can connect with customers over channels like email, SMS, push, or voice. Amazon Pinpoint is easy to set up, easy to use, and is flexible for all marketing communication scenarios.</p>
+                                                                                    </td>
+                                                                                </tr>
+                                                                
+                                                                                <tr>
+                                                                                    <td align="left" class="esd-block-button es-p10t es-p15b es-p15r es-p15l"><span class="es-button-border"><a href="https://aws.amazon.com/pinpoint/" class="es-button" target="_blank">Learn more...</a></span></td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                        <!--[if mso]></td><td width="20"></td><td width="270" valign="top"><![endif]-->
+                                                        <table cellpadding="0" cellspacing="0" class="es-right" align="right">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td width="270" align="left" class="esd-container-frame">
+                                                                        <table cellpadding="0" cellspacing="0" width="100%" bgcolor="#ffffff" style="background-color: #ffffff; border-radius: 3px; border-collapse: separate;">
+                                                                            <tbody>
+                                                                                <tr>
+                                                                                    <td align="center" class="esd-block-image" style="font-size: 0px;"><a target="_blank" class="rollover"><img class="adapt-img rollover-first" src="https://s3.amazonaws.com/aurbac.com/images/connect.jpg" alt style="display: block;" width="270">
+                                                                                            <div style="mso-hide:all;"><img width="270" class="adapt-img rollover-second" style="max-height: 0px; display: none;" src="https://s3.amazonaws.com/aurbac.com/images/connect.jpg" alt></div>
+                                                                                        </a></td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td align="left" class="esd-block-text es-m-txt-c es-p10t es-p15r es-p15l">
+                                                                                        <h3 style="color: #071f4f; font-size: 22px;">Easy to use omnichannel cloud contact center</h3>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td align="left" class="esd-block-text es-m-txt-c es-p5t es-p15r es-p15l">
+                                                                                        <p style="color: #999999;">Amazon Connect is an easy to use omnichannel cloud contact center that helps companies provide superior customer service at a lower cost. Over 10 years ago, Amazon’s retail business needed a contact center that would give our customers personal, dynamic, and natural experiences.</p>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                                                                                            <tr>
+                                                                                    <td align="left" class="esd-block-button es-p10t es-p15b es-p15r es-p15l"><span class="es-button-border"><a href="https://aws.amazon.com/connect/" class="es-button" target="_blank">Learn more...</a></span></td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                        <!--[if mso]></td></tr></table><![endif]-->
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+
+                  
+                  
+                  
+                </td>
+              </tr>
+
+            <!-- END MAIN CONTENT AREA -->
+            </table>
+
+
+
+            <!-- START FOOTER -->
+            <div class="footer" style="clear: both; Margin-top: 10px; text-align: center; width: 100%;">
+              <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;">
+                <tr>
+                  <td class="content-block" style="font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;">
+                    <span class="apple-link" style="color: #999999; font-size: 12px; text-align: center;">This is NOT an official AWS website and has no affiliation with Amazon Web Services.</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="content-block powered-by" style="font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;">
+                    Copyright ©<a href="http://htmlemail.io" style="color: #999999; font-size: 12px; text-align: center; text-decoration: none;">AURBAC</a> 2020.
+                  </td>
+                </tr>
+              </table>
+              
+              
+              
+             
+              
+              
+            </div>
+            <!-- END FOOTER -->
+
+          <!-- END CENTERED WHITE CONTAINER -->
+          </div>
+        </td>
+        <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">&nbsp;</td>
+      </tr>
+    </table>
+  </body>
+</html>

@@ -1,0 +1,75 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  sam-send-emails
+  Sample SAM Template for sam-send-emails
+
+Parameters:
+  SenderEmail:
+    Type: String
+    Description: Sender Email
+
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Function:
+    Timeout: 10
+
+Resources:
+
+  BucketFiles:
+    Type: AWS::S3::Bucket
+    DeletionPolicy: Retain
+    Properties:
+      BucketName: !Sub 'email-files-${AWS::AccountId}'
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: False
+        BlockPublicPolicy: False
+        IgnorePublicAcls: False
+        RestrictPublicBuckets: False
+
+  SendEmailsSqsQueue:
+    Type: AWS::SQS::Queue
+    
+  SendEmailsFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: emails/
+      Handler: app.lambda_handler
+      Runtime: python3.6
+      Policies:
+        - SQSPollerPolicy:
+            QueueName:
+              !GetAtt SendEmailsSqsQueue.QueueName
+        - Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Action:
+                - s3:Get*
+              Resource: !Sub 'arn:aws:s3:::email-files-${AWS::AccountId}/*'
+        - Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Action:
+                - ses:SendEmail
+                - ses:SendTemplatedEmail
+                - ses:SendRawEmail
+                - mobiletargeting:GetEmailTemplate
+              Resource: '*'
+      Environment:
+        Variables:
+          SENDER_EMAIL: !Ref SenderEmail
+          BUCKET_NAME: !Select [5, !Split [":", !GetAtt BucketFiles.Arn]]
+      Events:
+        MySQSEvent:
+          Type: SQS
+          Properties:
+            Queue: !GetAtt SendEmailsSqsQueue.Arn
+            BatchSize: 5
+
+Outputs:
+  S3Bucket:
+    Description: "Amazon S3 bucket name"
+    Value: !Select [5, !Split [":", !GetAtt BucketFiles.Arn]]
+  Queue:
+    Description: "Amazon SQS url"
+    Value: !Ref SendEmailsSqsQueue
