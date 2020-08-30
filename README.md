@@ -2,8 +2,12 @@
 
 This project contains source code and supporting files for a serverless application that you can deploy with the SAM CLI.
 
-- Work inside your AWS Cloud9 or local environment.
-- Verify at least 2 emails in Amazon SES
+
+
+## Requirements
+
+- Work inside your AWS Cloud9 or local environment - [Create an EC2 Environment](https://docs.aws.amazon.com/cloud9/latest/user-guide/create-environment-main.html#create-environment-console)
+- Verify at least 2 emails (sender & destination) - [Verifying an email address using the Amazon SES console](https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-email-addresses-procedure.html)
 
 ## Deploy the application
 
@@ -42,11 +46,15 @@ If you add or modify the project, deploy the SAM application with parameter over
 sam deploy --parameter-overrides ParameterKey=SenderEmail,ParameterValue=sender_email@domain.com
 ```
 
-## Upload files to test
+## Test sending email with Amazon SES
+
+Upload file to Amazon S3 used for sending emails as URL & attachment.
 
 ```bash
 aws s3 cp ses-test/tokyo-skytree.pdf s3://<bucket_name>/files/tokyo-skytree.pdf
 ```
+
+Create environment variables for testing.
 
 ```bash
 cd ses-test
@@ -54,6 +62,7 @@ export SENDER_EMAIL='sender_email@domain.com'
 export DESTINATION_EMAIL='destination_email@domain.com'
 export DESTINATION_NAME='destination name'
 export BUCKET_NAME='bucket_name'
+export CONFIGURATION_SET_NAME='configuration_set_name'
 ```
 
 Install the latest Boto 3 release via pip.
@@ -62,23 +71,32 @@ Install the latest Boto 3 release via pip.
 python -m pip install --user boto3
 ```
 
+Create a base template to send emails
+
 ```bash
 python create_template.py
 aws ses list-templates
 ```
 
+Send emails using the template.
 
 ```bash
 python send_templated_email.py
 ```
 
+Send email from HTML file.
+
 ```bash
 python send_email.py
 ```
 
+Send raw email from HTML file with attachment.
+
 ```bash
 python send_raw_email.py
 ```
+
+[More examples for send raw emails.](https://docs.aws.amazon.com/ses/latest/DeveloperGuide/examples-send-raw-using-sdk.html)
 
 ## Test the SAM project sending messages to the queue
 
@@ -98,6 +116,7 @@ To simplify troubleshooting, SAM CLI has a command called `sam logs`. `sam logs`
 
 ```bash
 sam logs -n SendEmailsFunction --stack-name sam-send-emails --tail
+sam logs -n ProcessFunction --stack-name sam-send-emails --tail
 ```
 
 You can find more information and examples about filtering Lambda function logs in the [SAM CLI Documentation](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-logging.html).

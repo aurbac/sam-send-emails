@@ -12,6 +12,7 @@ s = open(filename, 'r').read()
 email = os.environ['SENDER_EMAIL']
 destination = os.environ['DESTINATION_EMAIL']
 name = os.environ['DESTINATION_NAME']
+configuration_set_name = os.environ['CONFIGURATION_SET_NAME']
 reply = "no-reply@kabits.com"
 tags = [ { 'Name' : 'Name', 'Value' : name }]
 
@@ -62,6 +63,7 @@ response = ses.send_email(
             }
         }
     },
+    ConfigurationSetName=configuration_set_name
 )
 
 print(response)

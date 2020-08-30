@@ -16,6 +16,7 @@ Globals:
 
 Resources:
 
+  ## Bucket files to add in mails
   BucketFiles:
     Type: AWS::S3::Bucket
     DeletionPolicy: Retain
@@ -27,9 +28,12 @@ Resources:
         IgnorePublicAcls: False
         RestrictPublicBuckets: False
 
+  ## Queue for sending emails
   SendEmailsSqsQueue:
     Type: AWS::SQS::Queue
     
+    
+  ## Send emails with Lambda Function
   SendEmailsFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
@@ -65,6 +69,92 @@ Resources:
           Properties:
             Queue: !GetAtt SendEmailsSqsQueue.Arn
             BatchSize: 5
+
+
+  ## Raw data bucket
+  RawDataBucket:
+    Type: AWS::S3::Bucket
+
+  ## Processed Data
+  ProcessedDataBucket:
+    Type: AWS::S3::Bucket
+    
+  ## Ingest Firehose
+  Firehose:
+    Type: AWS::KinesisFirehose::DeliveryStream
+    Properties:
+      DeliveryStreamType: DirectPut
+      ExtendedS3DestinationConfiguration:
+        BucketARN: !GetAtt ProcessedDataBucket.Arn
+        CompressionFormat: GZIP
+        RoleARN: !GetAtt FirehoseAccessRole.Arn
+        ProcessingConfiguration:
+          Enabled: true
+          Processors:
+            - Type: Lambda
+              Parameters:
+                - ParameterName: LambdaArn
+                  ParameterValue: !GetAtt ProcessFunction.Arn
+        BufferingHints:
+          IntervalInSeconds: 60
+          SizeInMBs: 1
+        S3BackupMode: Enabled
+        S3BackupConfiguration:
+          BucketARN: !GetAtt RawDataBucket.Arn
+          CompressionFormat: GZIP
+          RoleARN: !GetAtt FirehoseAccessRole.Arn
+          BufferingHints:
+            IntervalInSeconds: 60
+            SizeInMBs: 1
+
+  # Initial process function
+  ProcessFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Timeout: 180
+      CodeUri: kinesis/
+      Handler: app.lambda_handler
+      Runtime: python3.6
+      
+  # Access role for Firehose
+  FirehoseAccessRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: "Allow"
+            Principal:
+              Service: "firehose.amazonaws.com"
+            Action: 
+              - "sts:AssumeRole"
+      Policies:
+        - PolicyName: S3WritePolicy
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              Action:
+                - s3:PutObject
+              Effect: Allow
+              Resource:
+                - !GetAtt RawDataBucket.Arn
+                - !Sub
+                  - ${Arn}/*
+                  - { Arn: !GetAtt RawDataBucket.Arn }
+                - !GetAtt ProcessedDataBucket.Arn
+                - !Sub
+                  - ${Arn}/*
+                  - { Arn: !GetAtt ProcessedDataBucket.Arn }
+        - PolicyName: LambdaInvokePolicy
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              Action:
+                - lambda:InvokeFunction
+              Effect: Allow
+              Resource:
+                - !GetAtt ProcessFunction.Arn
+
 
 Outputs:
   S3Bucket:

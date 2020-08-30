@@ -9,6 +9,7 @@ s3 = boto3.client('s3')
 email = os.environ['SENDER_EMAIL']
 destination = os.environ['DESTINATION_EMAIL']
 name = os.environ['DESTINATION_NAME']
+configuration_set_name = os.environ['CONFIGURATION_SET_NAME']
 reply = "no-reply@kabits.com"
 tags = [ { 'Name' : 'Name', 'Value' : name }]
 
@@ -39,7 +40,8 @@ response = ses.send_templated_email(
     ],
     Tags=tags,
     Template='base',
-    TemplateData=json.dumps(values)
+    TemplateData=json.dumps(values),
+    ConfigurationSetName=configuration_set_name
 )
 
 print(response)

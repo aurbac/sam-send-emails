@@ -15,6 +15,7 @@ s = open(filename, 'r').read()
 email = os.environ['SENDER_EMAIL']
 destination = os.environ['DESTINATION_EMAIL']
 name = os.environ['DESTINATION_NAME']
+configuration_set_name = os.environ['CONFIGURATION_SET_NAME']
 reply = "no-reply@kabits.com"
 tags = [ { 'Name' : 'Name', 'Value' : name }]
 
@@ -95,7 +96,8 @@ try:
         ],
         RawMessage={
             'Data':msg.as_string(),
-        }
+        },
+        ConfigurationSetName=configuration_set_name
     )
     print(response)
 except ClientError as e:
