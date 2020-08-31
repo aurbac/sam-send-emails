@@ -108,7 +108,7 @@ Resources:
             SizeInMBs: 1
 
   # Initial process function
-  ProcessFunction:
+  ProcessDataFunction:
     Type: AWS::Serverless::Function
     Properties:
       Timeout: 180

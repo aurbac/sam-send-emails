@@ -2,7 +2,7 @@
 
 This project contains source code and supporting files for a serverless application that you can deploy with the SAM CLI.
 
-
+![Sending emails using Amazon SES](images/diagram.png)
 
 ## Requirements
 
@@ -116,7 +116,7 @@ To simplify troubleshooting, SAM CLI has a command called `sam logs`. `sam logs`
 
 ```bash
 sam logs -n SendEmailsFunction --stack-name sam-send-emails --tail
-sam logs -n ProcessFunction --stack-name sam-send-emails --tail
+sam logs -n ProcessDataFunction --stack-name sam-send-emails --tail
 ```
 
 You can find more information and examples about filtering Lambda function logs in the [SAM CLI Documentation](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-logging.html).
