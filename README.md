@@ -51,7 +51,7 @@ sam deploy --parameter-overrides ParameterKey=SenderEmail,ParameterValue=sender_
 Before continue, we need to create a configuration set that defines a group of rules to the emails sent using Amazon SES.
 Amazon SES can track the number of send, delivery, open, click, bounce, and complaint events for each email you send.
 
-We are going to publish email sending events to an Amazon Kinesis Data Firehose delivery stream to be processed and stored.
+We are going to publish email sending events to an **Amazon Kinesis Data Firehose delivery stream** to be processed and stored, the kinesis delivery was created with the SAM application.
 
 ## Test sending email with Amazon SES
 

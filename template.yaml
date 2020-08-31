@@ -70,7 +70,6 @@ Resources:
             Queue: !GetAtt SendEmailsSqsQueue.Arn
             BatchSize: 5
 
-
   ## Raw data bucket
   RawDataBucket:
     Type: AWS::S3::Bucket
@@ -94,7 +93,7 @@ Resources:
             - Type: Lambda
               Parameters:
                 - ParameterName: LambdaArn
-                  ParameterValue: !GetAtt ProcessFunction.Arn
+                  ParameterValue: !GetAtt ProcessDataFunction.Arn
         BufferingHints:
           IntervalInSeconds: 60
           SizeInMBs: 1
@@ -153,7 +152,7 @@ Resources:
                 - lambda:InvokeFunction
               Effect: Allow
               Resource:
-                - !GetAtt ProcessFunction.Arn
+                - !GetAtt ProcessDataFunction.Arn
 
 
 Outputs:
@@ -163,3 +162,6 @@ Outputs:
   Queue:
     Description: "Amazon SQS url"
     Value: !Ref SendEmailsSqsQueue
+  Kinesis:
+    Description: "Kinesis Firehose delivery stream name"
+    Value: !Ref Firehose
