@@ -46,6 +46,13 @@ If you add or modify the project, deploy the SAM application with parameter over
 sam deploy --parameter-overrides ParameterKey=SenderEmail,ParameterValue=sender_email@domain.com
 ```
 
+## Create a Configuration Set for Amazon SES
+
+Before continue, we need to create a configuration set that defines a group of rules to the emails sent using Amazon SES.
+Amazon SES can track the number of send, delivery, open, click, bounce, and complaint events for each email you send.
+
+We are going to publish email sending events to an Amazon Kinesis Data Firehose delivery stream to be processed and stored.
+
 ## Test sending email with Amazon SES
 
 Upload file to Amazon S3 used for sending emails as URL & attachment.
@@ -54,7 +61,7 @@ Upload file to Amazon S3 used for sending emails as URL & attachment.
 aws s3 cp ses-test/tokyo-skytree.pdf s3://<bucket_name>/files/tokyo-skytree.pdf
 ```
 
-Create environment variables for testing.
+Create environment variables for testing, including the configuration set name created before.
 
 ```bash
 cd ses-test
@@ -105,7 +112,7 @@ Edit the **ses-test/send-message.json** file to send to the queue.
 Send a message to the queue to be processed by the lambda function.
 
 ```bash
-aws sqs send-message --queue-url <queue_url> --message-body "Send email." --delay-seconds 10 --message-attributes file://ses-test/send-message.json
+aws sqs send-message --queue-url <queue_url> --message-body "Send email." --delay-seconds 10 --message-attributes file://send-message.json
 ```
 
 ## Fetch, tail, and filter Lambda function logs
